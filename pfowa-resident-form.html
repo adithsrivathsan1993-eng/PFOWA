@@ -228,6 +228,11 @@
             <p class="error-msg" id="err-coownerPhone">Please enter a valid 10-digit number.</p>
           </div>
         </div>
+        <div class="field-group" style="margin-top:4px;">
+          <label for="coownerEmail">Co-owner's Email ID <span class="req">*</span></label>
+          <input type="email" id="coownerEmail" placeholder="Co-owner's email for communications">
+          <p class="error-msg" id="err-coownerEmail">Please enter a valid email address.</p>
+        </div>
       </div>
     </div>
 
@@ -299,7 +304,7 @@
   function toggleCoowner() {
     const checked = document.getElementById('hasCoowner').checked;
     document.getElementById('coownerFields').classList.toggle('show', checked);
-    if (!checked) { ['coownerName','coownerPhone'].forEach(id => { const el = document.getElementById(id); if (el) { el.value=''; clearError(id); } }); }
+    if (!checked) { ['coownerName','coownerPhone','coownerEmail'].forEach(id => { const el = document.getElementById(id); if (el) { el.value=''; clearError(id); } }); }
   }
 
   function setType(t) {
@@ -332,7 +337,7 @@
   function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
   function showError(id) { document.getElementById(id).classList.add('error'); document.getElementById('err-'+id).classList.add('show'); }
   function clearError(id) { document.getElementById(id).classList.remove('error'); document.getElementById('err-'+id).classList.remove('show'); }
-  ['block','flatNo','name','phone','email','coownerName','coownerPhone','ownerName','ownerPhone','ownerEmail'].forEach(id => {
+  ['block','flatNo','name','phone','email','coownerName','coownerPhone','coownerEmail','ownerName','ownerPhone','ownerEmail'].forEach(id => {
     const el = document.getElementById(id); if (el) el.addEventListener('input', () => clearError(id));
   });
 
@@ -349,6 +354,7 @@
       whatsapp: document.getElementById('whatsapp').checked,
       coownerName: hasCoowner ? document.getElementById('coownerName').value.trim() : '',
       coownerPhone: hasCoowner ? document.getElementById('coownerPhone').value.trim() : '',
+      coownerEmail: hasCoowner ? document.getElementById('coownerEmail').value.trim() : '',
       ownerName: currentType === 'tenant' ? document.getElementById('ownerName').value.trim() : '',
       ownerPhone: currentType === 'tenant' ? document.getElementById('ownerPhone').value.trim() : '',
       ownerEmail: currentType === 'tenant' ? document.getElementById('ownerEmail').value.trim() : ''
@@ -381,7 +387,7 @@
   }
 
   function resetForm() {
-    ['block','flatNo','name','phone','email','coownerName','coownerPhone','ownerName','ownerPhone','ownerEmail'].forEach(id => {
+    ['block','flatNo','name','phone','email','coownerName','coownerPhone','coownerEmail','ownerName','ownerPhone','ownerEmail'].forEach(id => {
       const el = document.getElementById(id); if (el) { el.value=''; clearError(id); }
     });
     document.getElementById('whatsapp').checked = true;
